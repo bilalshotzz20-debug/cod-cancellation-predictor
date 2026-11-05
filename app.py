@@ -1,4 +1,3 @@
-
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -21,7 +20,7 @@ st.set_page_config(
 )
 
 # =====================================================
-# PREMIUM UI DESIGN
+# ULTRA PREMIUM UI
 # =====================================================
 
 st.markdown("""
@@ -29,11 +28,11 @@ st.markdown("""
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 :root {
-    --bg: #080B14;
-    --surface: #101625;
-    --surface2: #151E30;
-    --border: rgba(148,163,184,.13);
-    --cyan: #22D3EE;
+    --bg: #070B13;
+    --surface: #0D1422;
+    --surface2: #121D30;
+    --border: rgba(148,163,184,.14);
+    --cyan: #67E8F9;
     --purple: #A78BFA;
     --text: #F1F5F9;
     --muted: #94A3B8;
@@ -45,9 +44,9 @@ html, body, [class*="css"] {
 
 .stApp {
     background:
-        radial-gradient(ellipse at 10% 0%, rgba(34,211,238,.09), transparent 35%),
-        radial-gradient(ellipse at 90% 10%, rgba(139,92,246,.10), transparent 35%),
-        var(--bg);
+        radial-gradient(900px 500px at 5% -10%, rgba(14,165,233,.13), transparent 60%),
+        radial-gradient(800px 480px at 100% 0%, rgba(124,58,237,.14), transparent 58%),
+        linear-gradient(180deg,#070B13 0%,#090F1B 55%,#070B13 100%);
     color: var(--text);
 }
 
@@ -55,52 +54,96 @@ html, body, [class*="css"] {
     visibility: hidden;
 }
 
+.block-container {
+    max-width: 1600px;
+    padding: 2rem 2.4rem 3rem;
+}
+
 [data-testid="stSidebar"] {
-    background: #0C1220;
-    border-right: 1px solid var(--border);
+    background: linear-gradient(180deg,#0B1220 0%,#080D17 100%);
+    border-right: 1px solid rgba(148,163,184,.12);
+}
+
+[data-testid="stSidebar"] > div {
+    padding-top: 1.4rem;
 }
 
 [data-testid="stSidebar"] * {
     color: var(--text);
 }
 
-.block-container {
-    padding-top: 2rem;
-    padding-bottom: 3rem;
-    max-width: 1500px;
+[data-testid="stSidebar"] [data-testid="stRadio"] label {
+    padding: 9px 12px;
+    border-radius: 11px;
+    transition: all .2s ease;
+}
+
+[data-testid="stSidebar"] [data-testid="stRadio"] label:hover {
+    background: rgba(103,232,249,.08);
+}
+
+[data-testid="stSidebar"] [data-testid="stRadio"] div[role="radiogroup"] {
+    gap: 7px;
+}
+
+[data-testid="stSidebar"] [data-testid="stRadio"] label p {
+    font-weight: 650;
+    font-size: 13px;
 }
 
 .hero {
-    padding: 26px 30px;
-    border-radius: 20px;
-    border: 1px solid rgba(34,211,238,.18);
-    background: linear-gradient(120deg,
-        rgba(34,211,238,.09),
-        rgba(139,92,246,.10),
-        rgba(16,22,37,.8));
+    position: relative;
+    overflow: hidden;
+    padding: 30px 34px;
+    border-radius: 23px;
+    border: 1px solid rgba(103,232,249,.19);
+    background: linear-gradient(
+        115deg,
+        rgba(14,165,233,.13),
+        rgba(124,58,237,.12) 58%,
+        rgba(15,23,42,.76)
+    );
+    box-shadow: 0 18px 60px rgba(0,0,0,.22);
     margin-bottom: 25px;
 }
 
+.hero:after {
+    content: "";
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    right: -85px;
+    top: -135px;
+    border-radius: 50%;
+    border: 1px solid rgba(103,232,249,.15);
+    box-shadow:
+        0 0 0 28px rgba(103,232,249,.025),
+        0 0 0 58px rgba(167,139,250,.025);
+}
+
 .hero-title {
-    font-size: 36px;
+    font-size: clamp(30px,4vw,43px);
     font-weight: 900;
-    letter-spacing: -1.5px;
+    line-height: 1.08;
+    letter-spacing: -1.8px;
     background: linear-gradient(90deg,#22D3EE,#A78BFA);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
 .hero-sub {
-    color: #94A3B8;
-    font-size: 13px;
+    max-width: 680px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #A8B6CA;
     margin-top: 8px;
 }
 
 .eyebrow {
-    color: #22D3EE;
-    font-size: 11px;
+    color: #67E8F9;
+    font-size: 10px;
     font-weight: 800;
-    letter-spacing: 2px;
+    letter-spacing: 2.4px;
     margin-bottom: 8px;
 }
 
@@ -112,96 +155,151 @@ html, body, [class*="css"] {
 }
 
 .metric-card {
-    background: linear-gradient(145deg,#151E30,#101625);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 20px;
-    min-height: 120px;
+    position: relative;
+    overflow: hidden;
+    min-height: 132px;
+    padding: 21px 22px;
+    background: linear-gradient(145deg,rgba(20,32,52,.96),rgba(12,20,34,.96));
+    border: 1px solid rgba(148,163,184,.14);
+    border-radius: 17px;
+    box-shadow: 0 10px 28px rgba(0,0,0,.16);
+    transition: transform .2s,border-color .2s;
+}
+
+.metric-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(103,232,249,.32);
+}
+
+.metric-card:after {
+    content: "";
+    position: absolute;
+    right: -28px;
+    top: -38px;
+    width: 105px;
+    height: 105px;
+    border-radius: 50%;
+    background: rgba(103,232,249,.055);
 }
 
 .metric-label {
     color: #94A3B8;
-    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.1px;
+    font-size: 10px;
     font-weight: 600;
 }
 
 .metric-value {
-    font-size: 27px;
+    font-size: 29px;
     font-weight: 800;
     color: #F1F5F9;
     margin-top: 9px;
+    letter-spacing: -.8px;
 }
 
 .metric-note {
-    color: #22D3EE;
+    color: #8EA2BC;
     font-size: 11px;
     margin-top: 5px;
 }
 
 .panel {
-    background: #101625;
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    padding: 22px;
+    background: linear-gradient(145deg,rgba(17,27,45,.96),rgba(11,18,31,.98));
+    border: 1px solid rgba(148,163,184,.14);
+    border-radius: 19px;
+    padding: 23px;
     margin-bottom: 18px;
+    box-shadow: 0 12px 34px rgba(0,0,0,.14);
 }
 
 .panel-heading {
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 750;
     color: #F1F5F9;
     margin-bottom: 5px;
 }
 
 .panel-caption {
-    color: #94A3B8;
+    color: #8FA1B8;
     font-size: 12px;
+    line-height: 1.6;
     margin-bottom: 20px;
 }
 
 .stButton > button,
 .stFormSubmitButton > button {
-    background: linear-gradient(100deg,#0891B2,#7C3AED);
+    min-height: 49px;
+    border-radius: 12px;
+    letter-spacing: .35px;
+    background: linear-gradient(
+        105deg,
+        #0891B2 0%,
+        #6366F1 55%,
+        #7C3AED 100%
+    );
     color: white;
     border: none;
-    border-radius: 10px;
-    padding: 12px;
     font-weight: 750;
-    min-height: 46px;
+    box-shadow: 0 8px 24px rgba(34,211,238,.12);
     transition: .2s ease;
 }
 
 .stButton > button:hover,
 .stFormSubmitButton > button:hover {
-    border: none;
-    box-shadow: 0 0 25px rgba(34,211,238,.2);
+    box-shadow: 0 10px 30px rgba(99,102,241,.24);
     transform: translateY(-2px);
 }
 
-.stSelectbox div[data-baseweb="select"],
-.stNumberInput input {
-    background: #0C1220;
-    border-radius: 9px;
+.stTextInput input,
+.stNumberInput input,
+.stSelectbox [data-baseweb="select"],
+.stMultiSelect [data-baseweb="select"] {
+    background: #0A1220 !important;
+    border-color: rgba(148,163,184,.2) !important;
+    border-radius: 11px !important;
 }
 
-div[data-testid="stMetric"] {
-    background: #101625;
-    border: 1px solid var(--border);
-    padding: 15px;
-    border-radius: 13px;
+[data-testid="stSlider"] [data-baseweb="slider"] {
+    padding-top: 8px;
 }
 
-div[data-testid="stMetricValue"] {
-    color: #22D3EE;
-    font-weight: 800;
-}
-
-div[data-testid="stTabs"] button {
+[data-testid="stTabs"] button {
+    padding: 11px 15px;
     font-weight: 700;
 }
 
+[data-testid="stDataFrame"] {
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    overflow: hidden;
+}
+
+[data-testid="stMetric"] {
+    background: linear-gradient(145deg,#121D30,#0D1422);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 15px 17px;
+}
+
+[data-testid="stMetricLabel"] {
+    color: #94A3B8;
+}
+
+[data-testid="stMetricValue"] {
+    color: #67E8F9;
+    font-weight: 800;
+    letter-spacing: -.6px;
+}
+
+.stAlert {
+    border-radius: 13px;
+    border-width: 1px;
+}
+
 hr {
-    border-color: var(--border);
+    margin: 1.5rem 0;
+    border-color: rgba(148,163,184,.13);
 }
 
 .small-muted {
@@ -209,6 +307,19 @@ hr {
     color: #64748B;
 }
 
+@media (max-width: 900px) {
+    .block-container {
+        padding: 1.2rem 1rem 2rem;
+    }
+
+    .hero {
+        padding: 24px 21px;
+    }
+
+    .panel {
+        padding: 17px;
+    }
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -224,9 +335,14 @@ def train_model():
     n = 3000
 
     cities = [
-        "Karachi", "Lahore", "Islamabad",
-        "Rawalpindi", "Kahuta", "Faisalabad",
-        "Multan", "Peshawar"
+        "Karachi",
+        "Lahore",
+        "Islamabad",
+        "Rawalpindi",
+        "Kahuta",
+        "Faisalabad",
+        "Multan",
+        "Peshawar"
     ]
 
     df = pd.DataFrame({
@@ -237,9 +353,7 @@ def train_model():
         "delivery_days": np.random.randint(1, 11, n)
     })
 
-    # Synthetic training labels.
-    # These are simulated data, not real customer records.
-
+    # Synthetic training labels
     logit = (
         -3.0
         + 0.65 * (df["delivery_days"] - 3)
@@ -249,7 +363,6 @@ def train_model():
     )
 
     probability = 1 / (1 + np.exp(-logit))
-
     df["is_cancelled"] = np.random.binomial(1, probability)
 
     encoded = pd.get_dummies(
@@ -262,7 +375,8 @@ def train_model():
     y = encoded["is_cancelled"]
 
     X_train, X_test, y_train, y_test = train_test_split(
-        X, y,
+        X,
+        y,
         test_size=0.2,
         random_state=42,
         stratify=y
@@ -271,9 +385,11 @@ def train_model():
     model = RandomForestClassifier(
         n_estimators=200,
         max_depth=12,
-        min_samples_leaf=3,
+        min_samples_split=5,
+        min_samples_leaf=2,
         random_state=42,
-        class_weight="balanced"
+        class_weight="balanced",
+        n_jobs=-1
     )
 
     model.fit(X_train, y_train)
@@ -284,10 +400,10 @@ def train_model():
     accuracy = accuracy_score(y_test, predictions)
     auc = roc_auc_score(y_test, probabilities)
 
-    return model, list(X.columns), accuracy, auc, df
+    return model, X.columns.tolist(), df, accuracy, auc
 
 
-model, model_columns, accuracy, auc, training_data = train_model()
+model, model_columns, training_data, accuracy, auc = train_model()
 
 # =====================================================
 # SESSION STATE
@@ -303,24 +419,26 @@ if "result" not in st.session_state:
 with st.sidebar:
 
     st.markdown("""
-    <div style="padding:10px 0 25px 0;">
-        <div style="font-size:28px;font-weight:900;
-        background:linear-gradient(90deg,#22D3EE,#A78BFA);
-        -webkit-background-clip:text;
-        -webkit-text-fill-color:transparent;">
-            ⚡ NEXUS AI
+    <div style="padding:8px 8px 25px;">
+        <div style="font-size:27px;font-weight:900;letter-spacing:-1px;">
+            <span style="color:#67E8F9;">NEXUS</span>
+            <span style="color:#A78BFA;">AI</span>
         </div>
-        <div style="font-size:10px;color:#64748B;
-        letter-spacing:2px;">INTELLIGENCE PLATFORM</div>
+        <div style="font-size:10px;letter-spacing:2px;color:#64748B;">
+            COD INTELLIGENCE
+        </div>
     </div>
     """, unsafe_allow_html=True)
 
-    st.markdown("### WORKSPACE")
+    st.markdown(
+        '<div class="eyebrow">WORKSPACE</div>',
+        unsafe_allow_html=True
+    )
 
     page = st.radio(
         "Navigation",
         [
-            "Prediction Center",
+            "Prediction Dashboard",
             "Business Intelligence",
             "Model Performance"
         ],
@@ -329,90 +447,106 @@ with st.sidebar:
 
     st.divider()
 
-    st.markdown("### SYSTEM STATUS")
+    st.markdown(
+        '<div class="eyebrow">SYSTEM STATUS</div>',
+        unsafe_allow_html=True
+    )
+
+    st.success("AI Engine Online")
 
     st.markdown("""
-    <div style="background:#10251F;padding:12px;
-    border-radius:10px;border:1px solid #14532D;">
-        <span style="color:#4ADE80;">●</span>
-        <b style="color:#4ADE80;"> Model Online</b>
-        <p style="font-size:10px;color:#94A3B8;margin:5px 0 0;">
-            Random Forest Prediction Engine
-        </p>
+    <div style="
+        background:#101A2B;
+        border:1px solid rgba(148,163,184,.13);
+        border-radius:12px;
+        padding:14px;
+        margin-top:12px;
+    ">
+        <div style="color:#94A3B8;font-size:11px;">MODEL VERSION</div>
+        <div style="color:#F1F5F9;font-size:15px;font-weight:750;">
+            Random Forest v2.1
+        </div>
+        <div style="color:#94A3B8;font-size:11px;margin-top:8px;">
+            Training records
+        </div>
+        <div style="color:#67E8F9;font-size:20px;font-weight:800;">
+            3,000
+        </div>
     </div>
     """, unsafe_allow_html=True)
 
-    st.markdown("<br>", unsafe_allow_html=True)
-
     st.markdown("""
-    <div style="font-size:10px;color:#64748B;">
-        NEXUS AI v2.0<br>
-        COD RISK INTELLIGENCE<br>
-        PAKISTAN EDITION · 2026
+    <div style="
+        position:fixed;
+        bottom:20px;
+        color:#64748B;
+        font-size:10px;
+    ">
+        NEXUS AI · VERSION 2.1<br>
+        BUILT FOR SMARTER LOGISTICS
     </div>
     """, unsafe_allow_html=True)
 
 # =====================================================
-# MAIN HEADER
+# MAIN HERO
 # =====================================================
 
 st.markdown("""
 <div class="hero">
-    <div class="eyebrow">NEXT-GENERATION E-COMMERCE INTELLIGENCE</div>
-    <div class="hero-title">COD Risk Engine</div>
+    <div class="eyebrow">INTELLIGENT E-COMMERCE ANALYTICS</div>
+    <div class="hero-title">COD Risk Intelligence</div>
     <div class="hero-sub">
-        Predict cancellations. Identify risky orders.
-        Make smarter logistics decisions.
+        Predict potential Cash-on-Delivery cancellations,
+        understand order patterns and make smarter logistics
+        decisions with AI-powered insights.
     </div>
 </div>
 """, unsafe_allow_html=True)
 
 # =====================================================
-# TOP KPI CARDS
+# PAGE 1: PREDICTION DASHBOARD
 # =====================================================
 
-def metric_card(label, value, note):
-    st.markdown(f"""
-    <div class="metric-card">
-        <div class="metric-label">{label}</div>
-        <div class="metric-value">{value}</div>
-        <div class="metric-note">{note}</div>
-    </div>
-    """, unsafe_allow_html=True)
+if page == "Prediction Dashboard":
 
+    total_orders = len(training_data)
+    cancellation_rate = training_data["is_cancelled"].mean() * 100
+    avg_order_value = training_data["order_value"].mean()
 
-k1, k2, k3, k4 = st.columns(4)
+    col1, col2, col3, col4 = st.columns(4)
 
-with k1:
-    metric_card("TRAINING RECORDS", f"{len(training_data):,}", "Synthetic dataset")
+    metrics = [
+        ("TOTAL ORDERS", f"{total_orders:,}", "Synthetic dataset"),
+        ("CANCELLATION RATE", f"{cancellation_rate:.1f}%", "Simulated data"),
+        ("AVG. ORDER VALUE", f"PKR {avg_order_value:,.0f}", "Average value"),
+        ("MODEL ACCURACY", f"{accuracy*100:.1f}%", "Held-out test set")
+    ]
 
-with k2:
-    metric_card("MODEL ACCURACY", f"{accuracy*100:.1f}%", "Holdout test set")
+    for column, (label, value, note) in zip(
+        [col1, col2, col3, col4],
+        metrics
+    ):
+        with column:
+            st.markdown(f"""
+            <div class="metric-card">
+                <div class="metric-label">{label}</div>
+                <div class="metric-value">{value}</div>
+                <div class="metric-note">{note}</div>
+            </div>
+            """, unsafe_allow_html=True)
 
-with k3:
-    metric_card("ROC-AUC", f"{auc:.3f}", "Holdout test set")
+    st.markdown("<br>", unsafe_allow_html=True)
 
-with k4:
-    metric_card("ALGORITHM", "RF-200", "Random Forest")
-
-st.markdown("<br>", unsafe_allow_html=True)
-
-# =====================================================
-# PAGE 1: PREDICTION CENTER
-# =====================================================
-
-if page == "Prediction Center":
-
-    left, right = st.columns([1, 1.15], gap="large")
+    left, right = st.columns([1, 1.1], gap="large")
 
     with left:
 
         st.markdown("""
         <div class="panel">
             <div class="eyebrow">ORDER CONFIGURATION</div>
-            <div class="panel-heading">📦 Analyze New Order</div>
+            <div class="panel-heading">Analyze a New Order</div>
             <div class="panel-caption">
-                Enter customer and delivery information.
+                Enter order details to estimate cancellation risk.
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -420,25 +554,32 @@ if page == "Prediction Center":
         with st.form("prediction_form"):
 
             city = st.selectbox(
-                "Destination City",
+                "Delivery Destination",
                 [
-                    "Karachi", "Lahore", "Islamabad",
-                    "Rawalpindi", "Kahuta", "Faisalabad",
-                    "Multan", "Peshawar"
+                    "Karachi",
+                    "Lahore",
+                    "Islamabad",
+                    "Rawalpindi",
+                    "Kahuta",
+                    "Faisalabad",
+                    "Multan",
+                    "Peshawar"
                 ]
             )
 
             order_value = st.number_input(
                 "Order Value (PKR)",
-                min_value=500,
-                max_value=15000,
+                min_value=100,
+                max_value=500000,
                 value=2500,
-                step=500
+                step=100
             )
 
             delivery_days = st.slider(
-                "Expected Delivery Time",
-                1, 10, 3,
+                "Estimated Delivery Time",
+                min_value=1,
+                max_value=10,
+                value=3,
                 format="%d days"
             )
 
@@ -483,7 +624,6 @@ if page == "Prediction Center":
 
             probability = model.predict_proba(input_df)[0][1] * 100
 
-            # Business decision thresholds
             if probability >= 60:
                 risk = "HIGH"
             elif probability >= 30:
@@ -523,7 +663,10 @@ if page == "Prediction Center":
                 value=probability,
                 number={
                     "suffix": "%",
-                    "font": {"size": 42, "color": "#F1F5F9"}
+                    "font": {
+                        "size": 42,
+                        "color": "#F1F5F9"
+                    }
                 },
                 gauge={
                     "axis": {
@@ -551,6 +694,7 @@ if page == "Prediction Center":
             st.plotly_chart(fig, use_container_width=True)
 
             if risk == "HIGH":
+
                 st.error("🚨 HIGH RISK ORDER")
 
                 st.markdown("""
@@ -561,6 +705,7 @@ if page == "Prediction Center":
                 """)
 
             elif risk == "MEDIUM":
+
                 st.warning("⚠️ MEDIUM RISK ORDER")
 
                 st.markdown("""
@@ -571,6 +716,7 @@ if page == "Prediction Center":
                 """)
 
             else:
+
                 st.success("✅ LOW RISK ORDER")
 
                 st.markdown("""
@@ -590,9 +736,13 @@ if page == "Prediction Center":
         else:
 
             st.markdown("""
-            <div style="background:#101625;border:1px dashed
-            rgba(34,211,238,.3);border-radius:16px;
-            padding:75px 20px;text-align:center;">
+            <div style="
+                background:#101625;
+                border:1px dashed rgba(34,211,238,.3);
+                border-radius:16px;
+                padding:75px 20px;
+                text-align:center;
+            ">
                 <div style="font-size:48px;">🔮</div>
                 <h3 style="color:#E2E8F0;">Awaiting Analysis</h3>
                 <p style="color:#64748B;font-size:13px;">
@@ -707,7 +857,9 @@ elif page == "Model Performance":
 
     st.markdown("## 🧠 Model Performance")
 
-    st.caption("Evaluation using a held-out synthetic test dataset.")
+    st.caption(
+        "Evaluation using a held-out synthetic test dataset."
+    )
 
     c1, c2, c3 = st.columns(3)
 
@@ -723,7 +875,8 @@ elif page == "Model Performance":
     })
 
     importance = importance.sort_values(
-        "Importance", ascending=True
+        "Importance",
+        ascending=True
     )
 
     fig = px.bar(
@@ -751,12 +904,16 @@ elif page == "Model Performance":
     st.markdown("""
     <div class="panel">
         <div class="panel-heading">Random Forest Classifier</div>
+
         <p style="color:#94A3B8;font-size:13px;">
-        The model combines 200 decision trees to estimate
-        the likelihood of a COD order cancellation.
+            The model combines 200 decision trees to estimate
+            the likelihood of a COD order cancellation.
         </p>
+
         <hr>
+
         <b>Input Features</b>
+
         <ul style="color:#CBD5E1;">
             <li>Destination City</li>
             <li>Order Value</li>
@@ -764,11 +921,12 @@ elif page == "Model Performance":
             <li>Number of Items</li>
             <li>Expected Delivery Days</li>
         </ul>
+
         <p style="color:#FBBF24;font-size:12px;">
-        Important: The current model uses simulated data.
-        Its predictions are experimental and should not be
-        used for real dispatch decisions until validated
-        against actual historical order records.
+            Important: The current model uses simulated data.
+            Its predictions are experimental and should not be
+            used for real dispatch decisions until validated
+            against actual historical order records.
         </p>
     </div>
     """, unsafe_allow_html=True)
@@ -780,8 +938,12 @@ elif page == "Model Performance":
 st.divider()
 
 st.markdown("""
-<div style="text-align:center;padding:12px;color:#64748B;
-font-size:11px;">
+<div style="
+    text-align:center;
+    padding:12px;
+    color:#64748B;
+    font-size:11px;
+">
     ⚡ NEXUS AI · COD RISK INTELLIGENCE · 2026<br>
     Built for smarter e-commerce logistics.
 </div>
